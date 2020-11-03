@@ -7,8 +7,9 @@ public class Appointment {
 	private String dateTypeOfPatient;
 	private LocalDateTime appointmentDate;
 	
-	public Appointment() {
-		
+	public Appointment(String dateTypeOfPatient, int year, int month, int day, int hour, int minute) {
+		setDateTypeOfPatient(dateTypeOfPatient);
+		setAppointmentDate(year, month, day, hour, minute);
 	}
 	
 	public String getDateTypeOfPatient() {
@@ -27,8 +28,12 @@ public class Appointment {
 		}
 	}
 	
-	public void setAppointmentDate(LocalDateTime appointmentDate) {
-		this.appointmentDate = appointmentDate;
+	public void setAppointmentDate(int year, int month, int day, int hour, int minute) {
+		if(year > 0 && month > 0 && day > 0 && hour > 0 && minute > 0) {
+			this.appointmentDate = LocalDateTime.of(year, month, day, hour, minute);			
+		} else {
+			this.appointmentDate = null;
+		}
 	}
 
 }
