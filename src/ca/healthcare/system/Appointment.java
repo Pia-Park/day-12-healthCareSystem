@@ -29,11 +29,18 @@ public class Appointment {
 	}
 	
 	public void setAppointmentDate(int year, int month, int day, int hour, int minute) {
-		if(year > 0 && month > 0 && day > 0 && hour > 0 && minute > 0) {
+		if(year > 0 && month > 0 && day > 0 && hour > 0 && minute >= 0) {
 			this.appointmentDate = LocalDateTime.of(year, month, day, hour, minute);			
 		} else {
 			this.appointmentDate = null;
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "======= Appointment Information =======\nData type of Patient: " + dateTypeOfPatient +
+				"\nAppointment Date: " + appointmentDate;
+				
 	}
 
 }

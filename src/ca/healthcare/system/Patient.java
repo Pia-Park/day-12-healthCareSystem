@@ -1,6 +1,7 @@
 package ca.healthcare.system;
 
 import java.time.LocalDate;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Patient {
 	
@@ -11,11 +12,13 @@ public class Patient {
 	private String pEmail;
 	private LocalDate bDate;
 	private String gender;
+	private static final AtomicInteger counter = new AtomicInteger();
+
 	
-	public Patient(int pId, String pFName, String pLName, String pPNum, 
+	public Patient(String pFName, String pLName, String pPNum, 
 			String pEmail, int year, int month, int day, String gender) {
 		
-		setPId(pId);
+		setPId();
 		setPFName(pFName);
 		setPLName(pLName);
 		setPPNum(pPNum);
@@ -52,8 +55,8 @@ public class Patient {
 		return gender;
 	}
 	
-	public void setPId(int pId) {
-		this.pId = pId;
+	public void setPId() {
+		this.pId = 1100 + counter.getAndIncrement();
 	}
 	
 	public void setPFName(String pFName) {
@@ -103,6 +106,16 @@ public class Patient {
 		} else {
 			this.gender = "Wrong Information.";
 		}
+	}
+	
+	@Override
+	public String toString() {
+		return "======= Patient Information =======\nID: "+ pId + 
+				"\nName: " + pFName + " " + pLName
+				+ "\nPhone Number: " + pPNum +
+				"\nEmail: " + pEmail +
+				"\nBirth of date: " + bDate + 
+				"\nGender: " + gender + "\n";
 	}
 	
 

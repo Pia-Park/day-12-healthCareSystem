@@ -1,6 +1,9 @@
 package ca.healthcare.system;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Doctor {
 	
@@ -10,18 +13,20 @@ public class Doctor {
 	private String pNum;
 	private String email;
 	private String specialty;
-	ArrayList<Doctor> appointmentArr;
+	private ArrayList<Doctor> appointmentArr;	
+	private static final AtomicInteger counter = new AtomicInteger();
 	
-	public Doctor(int id, String fName, String lName, String pNum, String email, 
-			String specialty, ArrayList<Doctor> appointmentArr) {
+	
+	public Doctor(String fName, String lName, String pNum, String email, 
+			String specialty) {
 		
-		setId(id);
+		setId();
 		setFName(fName);
 		setLName(lName);
 		setPNum(pNum);
 		setEmail(email);
 		setSpecialty(specialty);
-		setAppointmentArr(appointmentArr);
+		this.appointmentArr = new ArrayList<Doctor>();
 		
 	}
 	
@@ -53,8 +58,9 @@ public class Doctor {
 		return appointmentArr;
 	}
 	
-	public void setId(int id) {
-		this.id = id;
+	public void setId() {
+		this.id = 1000 + counter.getAndIncrement();
+		
 	}
 	
 	public void setFName(String fName) {
@@ -97,7 +103,17 @@ public class Doctor {
 		}
 	}
 	
-	public void setAppointmentArr(ArrayList<Doctor> appointmentArr) {
-		this.appointmentArr = appointmentArr;
+	public void setAppointmentArr(Doctor appointmentArr) {
+			this.appointmentArr.add(appointmentArr);			
+	}
+	
+	@Override
+	public String toString() {
+		return "======= Doctor Information =======\nID: " + id +
+				"\nName: " + fName + " " + lName +
+				"\nPhone Number: " + pNum +
+				"\nEmail: " + email +
+				"\nSpecialty: " + specialty
+				+ "\nAppointment: " + appointmentArr.toString() + "\n";
 	}
 }
