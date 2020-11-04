@@ -156,10 +156,8 @@ public class Driver {
 			System.out.println("Your Appointment is " + a.getAppointmentDate().getMonth() 
 					+ " " + a.getAppointmentDate().getDayOfMonth() + " " + a.getAppointmentDate().getYear() 
 					+ " " + a.getAppointmentDate().getHour() + ":" + a.getAppointmentDate().getMinute() + 
-					" with Doctor " + doctor.getFName() + " " + doctor.getLName());
-			
-			
-			
+					" with Doctor " + doctor.getFName() + " " + doctor.getLName());			
+						
 		} else if(answer.equalsIgnoreCase("d")) {
 			Doctor doctor = findDoctor(dArr);
 			System.out.println(doctor);
@@ -167,8 +165,16 @@ public class Driver {
 				System.out.println("You don't have any appointment.");
 			} else {
 				System.out.println(doctor.getAppointmentArr());
+				System.out.println("Your Appointment is " + doctor.getAppointmentArr().get(0).getAppointmentDate().getMonth() +
+						" " + doctor.getAppointmentArr().get(0).getAppointmentDate().getDayOfMonth() + " " + 
+						+ doctor.getAppointmentArr().get(0).getAppointmentDate().getYear() + " " +
+						doctor.getAppointmentArr().get(0).getAppointmentDate().getHour() + ":" + 
+						doctor.getAppointmentArr().get(0).getAppointmentDate().getMinute() + 
+						" with Patient " + doctor.getAppointmentArr().get(0).getPatient().getPFName() + " "
+						+ doctor.getAppointmentArr().get(0).getPatient().getPLName()); 
 			}
-		} 
+		}				
+
 
 	}
 

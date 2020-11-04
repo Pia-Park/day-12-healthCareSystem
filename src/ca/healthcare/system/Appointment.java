@@ -18,7 +18,7 @@ public class Appointment {
 		return appointmentDate;
 	}
 	
-	public Patient patient() {
+	public Patient getPatient() {
 		return patient;
 	}
 	
