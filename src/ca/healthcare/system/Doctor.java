@@ -13,7 +13,7 @@ public class Doctor {
 	private String pNum;
 	private String email;
 	private String specialty;
-	private ArrayList<Doctor> appointmentArr;	
+	private ArrayList<Appointment> appointmentArr;	
 	private static final AtomicInteger counter = new AtomicInteger();
 	
 	
@@ -26,7 +26,7 @@ public class Doctor {
 		setPNum(pNum);
 		setEmail(email);
 		setSpecialty(specialty);
-		this.appointmentArr = new ArrayList<Doctor>();
+		this.appointmentArr = new ArrayList<>();
 		
 	}
 	
@@ -54,9 +54,9 @@ public class Doctor {
 		return specialty;
 	}
 	
-	public ArrayList<Doctor> getAppointmentArr() {
+	public ArrayList<Appointment> getAppointmentArr() {
 		return appointmentArr;
-	}
+	}	
 	
 	public void setId() {
 		this.id = 1000 + counter.getAndIncrement();
@@ -103,7 +103,7 @@ public class Doctor {
 		}
 	}
 	
-	public void setAppointmentArr(Doctor appointmentArr) {
+	public void setAppointmentArr(Appointment appointmentArr) {
 			this.appointmentArr.add(appointmentArr);			
 	}
 	

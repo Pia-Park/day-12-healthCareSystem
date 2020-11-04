@@ -31,6 +31,70 @@ public class Driver {
 	}
 	
 	
+	public static String answerPD() {
+		Scanner input = new Scanner(System.in);
+		System.out.println("Hello this is Yuri&Inae health care.\nIf you are a patient, please press 'p'."
+				+ "\nIf you are a doctor, Please press 'd': ");
+		String answer = input.nextLine();
+		
+		while(!answer.equalsIgnoreCase("p") && !answer.equalsIgnoreCase("d")) {
+			System.err.println("Wrong Information. Please try again.");
+			System.out.println("Enter the P(patient) or D(doctor): ");
+			answer = input.nextLine();
+		} return answer;
+	}
+	
+	public static Patient findPatient(ArrayList<Patient> patients) {
+		Scanner input = new Scanner(System.in);
+		Patient foundP = null;
+		
+		while(foundP == null) {
+			System.out.println("Enter the Patient ID: ");
+			int id = input.nextInt();
+			for (Patient patient : patients) {
+				if(id == patient.getPId()) {
+					return patient;
+				} 				
+			} 
+			System.err.println("Wrong Information. Please try again.");
+		}
+		
+		return foundP;
+	}
+	
+	public static Doctor findDoctor(ArrayList<Doctor> doctors) {
+		
+		Scanner input = new Scanner(System.in);
+		Doctor foundD = null;
+		
+		while(foundD == null) {
+			System.out.println("Enter the Doctor ID: ");
+			int id = input.nextInt();
+			for (Doctor doctor : doctors) {
+				if(id == doctor.getId()) {
+					return doctor;
+				}
+			}
+			System.err.println("Wrong Information. Please try again.");
+		}
+		return foundD;
+	}
+	
+	public static Appointment makeAppoint(Patient patient) {
+		
+		Scanner input = new Scanner(System.in);
+		System.out.println("When would you like to make an appointment?(YYYY/MM/DD/HH/MM): ");
+		int year = input.nextInt();
+		int month = input.nextInt();
+		int day = input.nextInt();
+		int hour = input.nextInt();
+		int minute = input.nextInt();
+		
+		return new Appointment(patient, year, month, day, hour, minute);
+				
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		Scanner input = new Scanner(System.in);
@@ -70,73 +134,35 @@ public class Driver {
 		dArr.add(d4);
 				
 		
-		Appointment a1 = new Appointment("Jessica", "Markham", "778 888 888", "Js@gmail.com", 1990, 10, 18, "F", 2020, 11, 20, 10, 00);
-		Appointment a2 = new Appointment("Alvin", "Mcguire", "778 111 222","ab@gmail.com", 1975, 12, 18, "M", 2020, 11, 23, 11, 00);
+		Appointment a1 = new Appointment(p1, 2020, 11, 20, 10, 00);
+		Appointment a2 = new Appointment(p2, 2020, 11, 23, 11, 00);
 		ArrayList<Appointment> aArr = new ArrayList<Appointment>();
 		aArr.add(a1);
 		aArr.add(a2);
+		d1.getAppointmentArr().add(a1);
+		d3.getAppointmentArr().add(a2);
 		
-//		printAllPatient(pArr);
-//		printAllAppointment(aArr);
 		
-		System.out.println("Hello this is Yuri&Inae health care.\nIf you are a patient, please press 'p'."
-				+ "\nIf you are a doctor, Please press 'd': ");
-		String answer = input.nextLine();
-				
+		String answer = answerPD();
 		
 		if(answer.equalsIgnoreCase("p")) {
-			System.out.println("Enter the Patient ID: ");
-			int patientId = input.nextInt();
-			for(int i = 0; i < pArr.size(); i++) {
-				if(patientId == pArr.get(i).getPId()) {
-					System.out.println(pArr.get(i).toString());
-					System.out.println("When do you want to make an appointment?(yyyy/mm/dd/hh/mm): ");
-					int year = input.nextInt();
-					int month = input.nextInt();
-					int day = input.nextInt();
-					int hour = input.nextInt();
-					int minute = input.nextInt();
-					LocalDate appDay = LocalDate.of(year, month, day);
-					LocalTime appTime = LocalTime.of(hour, minute);
-					
-					System.out.println("Enter the Doctor ID: ");
-					int doctorId = input.nextInt();
-					if(doctorId > 0) {
-						for (int j = 0; j < dArr.size(); j++) {
-							if(doctorId == dArr.get(j).getId()) {
-								System.out.println("Your appointment is " + appDay.getMonth().toString()+ " " + appDay.getDayOfMonth() 
-								+ " " + appDay.getYear()+ " " + appTime + " with Doctor " + dArr.get(j).getFName() + " " + dArr.get(j).getLName() + ".");
-								Appointment a = new Appointment(pArr.get(i).getPFName(), pArr.get(i).getPLName(), pArr.get(i).getPPNum(), pArr.get(i).getPEmail(), 
-										pArr.get(i).getBDate().getYear(),pArr.get(i).getBDate().getMonthValue(), pArr.get(i).getBDate().getDayOfMonth(), pArr.get(i).getGender(), 
-										year, month, day, hour, minute);
-								aArr.add(a);
-								System.out.println(dArr.get(j).toString() + aArr.get(j));
-								
-							}
-						}
-					}					
-								
-				} 
-//					else {
-//					System.err.println("Wrong Information!!");
-//					System.out.println("Please enter the patient ID again: ");
-//					patientId = input.nextInt();
-//				}
-			}
-		} else if(answer.equalsIgnoreCase("d")) {
-			System.out.println("Entehr the Doctor ID: ");
-			int doctorId = input.nextInt();
-			for(int j = 0; j < dArr.size(); j++) {
-				if(doctorId == dArr.get(j).getId()) {					
-						System.out.println(dArr.get(j).toString() + aArr.get(j).toString());						
-					} else {
-						System.out.println(dArr.get(j).toString() + "\nThere is no appointment.");
-					}
-				}
+			Patient patient = findPatient(pArr);
+			System.out.println(patient);
+			Doctor doctor = findDoctor(dArr);
+			Appointment a = makeAppoint(patient);
+			System.out.println(a);
+			doctor.setAppointmentArr(a);
 			
-		}
-		
-//		printAllAppointment(aArr);
+			
+		} else if(answer.equalsIgnoreCase("d")) {
+			Doctor doctor = findDoctor(dArr);
+			System.out.println(doctor);
+			if(doctor.getAppointmentArr().isEmpty()) {
+				System.out.println("You don't have any appointment.");
+			} else {
+				System.out.println(doctor.getAppointmentArr());
+			}
+		} 
 
 	}
 
