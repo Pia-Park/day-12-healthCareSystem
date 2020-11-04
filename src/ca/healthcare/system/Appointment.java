@@ -2,35 +2,24 @@ package ca.healthcare.system;
 
 import java.time.LocalDateTime;
 
-public class Appointment {
+public class Appointment extends Patient{
 	
-	private String dateTypeOfPatient;
 	private LocalDateTime appointmentDate;
 	
-	public Appointment(String dateTypeOfPatient, int year, int month, int day, int hour, int minute) {
-		setDateTypeOfPatient(dateTypeOfPatient);
-		setAppointmentDate(year, month, day, hour, minute);
+	public Appointment(String pFName, String pLName, String pPNum, String pEmail, int year,  int month, int day, String gender, int aYear, int aMonth, int aDay, int aHour, int aMinute) {
+		super(pFName, pLName, pPNum, pEmail, year, month, day, gender);
+		setAppointmentDate(aYear, aMonth, aDay, aHour, aMinute);
 	}
 	
-	public String getDateTypeOfPatient() {
-		return dateTypeOfPatient;
-	}
 	
 	public LocalDateTime getAppointmentDate() {
 		return appointmentDate;
 	}
 	
-	public void setDateTypeOfPatient(String dateTypeOfPatient) {
-		if(!dateTypeOfPatient.isEmpty() && !dateTypeOfPatient.equalsIgnoreCase(null)) {
-			this.dateTypeOfPatient = dateTypeOfPatient;
-		} else {
-			this.dateTypeOfPatient = "Wrong Information.";
-		}
-	}
 	
-	public void setAppointmentDate(int year, int month, int day, int hour, int minute) {
-		if(year > 0 && month > 0 && day > 0 && hour > 0 && minute >= 0) {
-			this.appointmentDate = LocalDateTime.of(year, month, day, hour, minute);			
+	public void setAppointmentDate(int aYear, int aMonth, int aDay, int aHour, int aMinute) {
+		if(aYear > 0 && aMonth > 0 && aDay > 0 && aHour > 0 && aMinute >= 0) {
+			this.appointmentDate = LocalDateTime.of(aYear, aMonth, aDay, aHour, aMinute);			
 		} else {
 			this.appointmentDate = null;
 		}
@@ -38,8 +27,8 @@ public class Appointment {
 	
 	@Override
 	public String toString() {
-		return "======= Appointment Information =======\nData type of Patient: " + dateTypeOfPatient +
-				"\nAppointment Date: " + appointmentDate;
+		return "======= Appointment Information =======\n" + super.toString() +
+				"\nAppointment Date: " + appointmentDate + "\n";
 				
 	}
 

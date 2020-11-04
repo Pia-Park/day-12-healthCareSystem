@@ -70,14 +70,14 @@ public class Driver {
 		dArr.add(d4);
 				
 		
-		Appointment a1 = new Appointment("surgery", 2020, 11, 20, 10, 00);
-		Appointment a2 = new Appointment("Padiatric surgery", 2020, 11, 23, 11, 00);
+		Appointment a1 = new Appointment("Jessica", "Markham", "778 888 888", "Js@gmail.com", 1990, 10, 18, "F", 2020, 11, 20, 10, 00);
+		Appointment a2 = new Appointment("Alvin", "Mcguire", "778 111 222","ab@gmail.com", 1975, 12, 18, "M", 2020, 11, 23, 11, 00);
 		ArrayList<Appointment> aArr = new ArrayList<Appointment>();
 		aArr.add(a1);
 		aArr.add(a2);
 		
 //		printAllPatient(pArr);
-		printAllAppointment(aArr);
+//		printAllAppointment(aArr);
 		
 		System.out.println("Hello this is Yuri&Inae health care.\nIf you are a patient, please press 'p'."
 				+ "\nIf you are a doctor, Please press 'd': ");
@@ -106,15 +106,15 @@ public class Driver {
 							if(doctorId == dArr.get(j).getId()) {
 								System.out.println("Your appointment is " + appDay.getMonth().toString()+ " " + appDay.getDayOfMonth() 
 								+ " " + appDay.getYear()+ " " + appTime + " with Doctor " + dArr.get(j).getFName() + " " + dArr.get(j).getLName() + ".");
-								Appointment a = new Appointment(pArr.get(i).getPFName(), year, month, day, hour, minute);
+								Appointment a = new Appointment(pArr.get(i).getPFName(), pArr.get(i).getPLName(), pArr.get(i).getPPNum(), pArr.get(i).getPEmail(), 
+										pArr.get(i).getBDate().getYear(),pArr.get(i).getBDate().getMonthValue(), pArr.get(i).getBDate().getDayOfMonth(), pArr.get(i).getGender(), 
+										year, month, day, hour, minute);
 								aArr.add(a);
-								System.out.println(dArr.get(j).toString());
+								System.out.println(dArr.get(j).toString() + aArr.get(j));
 								
 							}
 						}
-					}
-					
-
+					}					
 								
 				} 
 //					else {
@@ -127,13 +127,16 @@ public class Driver {
 			System.out.println("Entehr the Doctor ID: ");
 			int doctorId = input.nextInt();
 			for(int j = 0; j < dArr.size(); j++) {
-				if(doctorId == dArr.get(j).getId()) {
-					System.out.println(dArr.get(j).toString());
+				if(doctorId == dArr.get(j).getId()) {					
+						System.out.println(dArr.get(j).toString() + aArr.get(j).toString());						
+					} else {
+						System.out.println(dArr.get(j).toString() + "\nThere is no appointment.");
+					}
 				}
-			}
+			
 		}
 		
-		printAllAppointment(aArr);
+//		printAllAppointment(aArr);
 
 	}
 

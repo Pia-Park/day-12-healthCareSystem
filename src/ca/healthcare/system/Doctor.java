@@ -113,7 +113,7 @@ public class Doctor {
 				"\nName: " + fName + " " + lName +
 				"\nPhone Number: " + pNum +
 				"\nEmail: " + email +
-				"\nSpecialty: " + specialty
-				+ "\nAppointment: " + appointmentArr.toString() + "\n";
+				"\nSpecialty: " + specialty + "\n";
+//				+ "\nAppointment: " + appointmentArr + "\n";
 	}
 }
