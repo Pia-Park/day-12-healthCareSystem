@@ -91,6 +91,7 @@ public class Driver {
 		int minute = input.nextInt();
 		
 		return new Appointment(patient, year, month, day, hour, minute);
+		
 				
 	}
 	
@@ -152,6 +153,11 @@ public class Driver {
 			Appointment a = makeAppoint(patient);
 			System.out.println(a);
 			doctor.setAppointmentArr(a);
+			System.out.println("Your Appointment is " + a.getAppointmentDate().getMonth() 
+					+ " " + a.getAppointmentDate().getDayOfMonth() + " " + a.getAppointmentDate().getYear() 
+					+ " " + a.getAppointmentDate().getHour() + ":" + a.getAppointmentDate().getMinute() + 
+					" with Doctor " + doctor.getFName() + " " + doctor.getLName());
+			
 			
 			
 		} else if(answer.equalsIgnoreCase("d")) {
