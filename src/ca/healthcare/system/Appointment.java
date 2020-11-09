@@ -2,7 +2,7 @@ package ca.healthcare.system;
 
 import java.time.LocalDateTime;
 
-public class Appointment {
+public class Appointment implements Comparable<Appointment>{
 	
 	private LocalDateTime appointmentDate;
 	private Patient patient;
@@ -39,6 +39,11 @@ public class Appointment {
 		return "======= Appointment Information =======\n" + patient +
 				"\nAppointment Date: " + appointmentDate + "\n";
 				
+	}
+	
+	@Override
+	public int compareTo(Appointment a) {
+		return this.getAppointmentDate().compareTo(a.getAppointmentDate());
 	}
 
 }

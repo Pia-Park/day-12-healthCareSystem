@@ -7,6 +7,7 @@ import java.time.chrono.JapaneseChronology;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 public class Driver {
@@ -21,6 +22,12 @@ public class Driver {
 	public static void printAllDoctor(ArrayList<Doctor> ddArr) {
 		for (Doctor d : ddArr) {
 			System.out.println(d.toString());
+		}
+	}
+	
+	public static void printAllUser(ArrayList<User> uuArr) {
+		for(User u: uuArr) {
+			System.out.println(u.toString());
 		}
 	}
 	
@@ -80,6 +87,24 @@ public class Driver {
 		return foundD;
 	}
 	
+	public static User findUser(ArrayList<User> user) {
+		Scanner input = new Scanner(System.in);
+		Patient foundU = null;
+		
+		while(foundU == null) {
+			System.out.println("Enter the User ID: ");
+			int id = input.nextInt();
+			for (User u : user) {
+				if(id == u.getId()) {
+					return u;
+				} 				
+			} 
+			System.err.println("Wrong Information. Please try again.");
+		}
+		
+		return foundU;
+	}
+	
 	public static Appointment makeAppoint(Patient patient) {
 		
 		Scanner input = new Scanner(System.in);
@@ -133,24 +158,69 @@ public class Driver {
 		dArr.add(d2);
 		dArr.add(d3);
 		dArr.add(d4);
+		
+		ArrayList<User> uArr = new ArrayList<User>();
+		uArr.add(p1);
+		uArr.add(p2);
+		uArr.add(p3);
+		uArr.add(p4);
+		uArr.add(p5);
+		uArr.add(p6);
+		uArr.add(p7);
+		uArr.add(p8);
+		uArr.add(p9);
+		uArr.add(p10);
+		uArr.add(d1);
+		uArr.add(d2);
+		uArr.add(d3);
+		uArr.add(d4);
 				
 		
 		Appointment a1 = new Appointment(p1, 2020, 11, 20, 10, 00);
 		Appointment a2 = new Appointment(p2, 2020, 11, 23, 11, 00);
+		Appointment a3 = new Appointment(p3, 2020, 11, 18, 11, 00);
 		ArrayList<Appointment> aArr = new ArrayList<Appointment>();
 		aArr.add(a1);
 		aArr.add(a2);
 		d1.getAppointmentArr().add(a1);
 		d3.getAppointmentArr().add(a2);
+		d3.getAppointmentArr().add(a3);
+
+
+		//print Doctor list and Patient list
+//		printAllDoctor(dArr);
+//		printAllPatient(pArr);
 		
-		printAllDoctor(dArr);
-		printAllPatient(pArr);
+		//Sorted patient list by last name
+//		Collections.sort(pArr, new UserSorter.CompareByName());
+//		for (User u : pArr) {
+//			System.out.println(u);
+//			
+//		}
 		
-		String answer = answerPD();
 		
-		if(answer.equalsIgnoreCase("p")) {
-			Patient patient = findPatient(pArr);
-			System.out.println(patient);
+		//Sorted Appointment by date
+//		Collections.sort(aArr);
+//		for (Appointment a : aArr) {
+//			System.out.println(a);
+//		}
+		
+		
+		//Sorted All User list by last name
+//		Collections.sort(uArr, new UserSorter.CompareByName());
+//		for (User u : uArr) {
+//			System.out.println(u);
+			
+		
+		//get the information from the User array
+		User user = findUser(uArr);
+		
+		if(user instanceof Doctor) {
+			Collections.sort(((Doctor) user).getAppointmentArr());
+			System.out.println(user);
+		} else if(user instanceof Patient) {
+			System.out.println(user);
+			Patient patient = (Patient) user;
 			Doctor doctor = findDoctor(dArr);
 			Appointment a = makeAppoint(patient);
 			System.out.println(a);
@@ -158,25 +228,43 @@ public class Driver {
 			System.out.println("Your Appointment is " + a.getAppointmentDate().getMonth() 
 					+ " " + a.getAppointmentDate().getDayOfMonth() + " " + a.getAppointmentDate().getYear() 
 					+ " " + a.getAppointmentDate().getHour() + ":" + a.getAppointmentDate().getMinute() + 
-					" with Doctor " + doctor.getFName() + " " + doctor.getLName());			
-						
-		} else if(answer.equalsIgnoreCase("d")) {
-			Doctor doctor = findDoctor(dArr);
-			System.out.println(doctor);
-			if(doctor.getAppointmentArr().isEmpty()) {
-				System.out.println("You don't have any appointment.");
-			} else {
-				System.out.println(doctor.getAppointmentArr());
-				System.out.println("Your Appointment is " + doctor.getAppointmentArr().get(0).getAppointmentDate().getMonth() +
-						" " + doctor.getAppointmentArr().get(0).getAppointmentDate().getDayOfMonth() + " " + 
-						+ doctor.getAppointmentArr().get(0).getAppointmentDate().getYear() + " " +
-						doctor.getAppointmentArr().get(0).getAppointmentDate().getHour() + ":" + 
-						doctor.getAppointmentArr().get(0).getAppointmentDate().getMinute() + 
-						" with Patient " + doctor.getAppointmentArr().get(0).getPatient().getFName() + " "
-						+ doctor.getAppointmentArr().get(0).getPatient().getLName()); 
-			}
-		}				
-
+					" with Doctor " + doctor.getFName() + " " + doctor.getLName());	
+		} else {
+			System.err.println("Wrong Information!!!!!!!");
+		}
+		
+		
+		//Ask ID
+//		String answer = answerPD();
+//		
+//		if(answer.equalsIgnoreCase("p")) {
+//			Patient patient = findPatient(pArr);
+//			System.out.println(patient);
+//			Doctor doctor = findDoctor(dArr);
+//			Appointment a = makeAppoint(patient);
+//			System.out.println(a);
+//			doctor.setAppointmentArr(a);
+//			System.out.println("Your Appointment is " + a.getAppointmentDate().getMonth() 
+//					+ " " + a.getAppointmentDate().getDayOfMonth() + " " + a.getAppointmentDate().getYear() 
+//					+ " " + a.getAppointmentDate().getHour() + ":" + a.getAppointmentDate().getMinute() + 
+//					" with Doctor " + doctor.getFName() + " " + doctor.getLName());			
+//						
+//		} else if(answer.equalsIgnoreCase("d")) {
+//			Doctor doctor = findDoctor(dArr);
+//			System.out.println(doctor);
+//			if(doctor.getAppointmentArr().isEmpty()) {
+//				System.out.println("You don't have any appointment.");
+//			} else {
+//				System.out.println(doctor.getAppointmentArr());
+//				System.out.println("Your Appointment is " + doctor.getAppointmentArr().get(0).getAppointmentDate().getMonth() +
+//						" " + doctor.getAppointmentArr().get(0).getAppointmentDate().getDayOfMonth() + " " + 
+//						+ doctor.getAppointmentArr().get(0).getAppointmentDate().getYear() + " " +
+//						doctor.getAppointmentArr().get(0).getAppointmentDate().getHour() + ":" + 
+//						doctor.getAppointmentArr().get(0).getAppointmentDate().getMinute() + 
+//						" with Patient " + doctor.getAppointmentArr().get(0).getPatient().getFName() + " "
+//						+ doctor.getAppointmentArr().get(0).getPatient().getLName()); 
+//			}
+//		}				
 
 	}
 

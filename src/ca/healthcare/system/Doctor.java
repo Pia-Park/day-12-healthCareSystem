@@ -47,7 +47,7 @@ public class Doctor extends User{
 	@Override
 	public String toString() {
 		return "======= Doctor Information =======\n" + super.toString() +
-				"\nSpecialty: " + specialty + "\n";
-//				+ "\nAppointment: " + appointmentArr + "\n";
+				"\nSpecialty: " + specialty 
+				+ "\nAppointment: \n" + appointmentArr.toString() + "\n";
 	}
 }
