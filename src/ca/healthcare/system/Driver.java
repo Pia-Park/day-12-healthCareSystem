@@ -52,7 +52,7 @@ public class Driver {
 			System.out.println("Enter the Patient ID: ");
 			int id = input.nextInt();
 			for (Patient patient : patients) {
-				if(id == patient.getPId()) {
+				if(id == patient.getId()) {
 					return patient;
 				} 				
 			} 
@@ -143,6 +143,8 @@ public class Driver {
 		d1.getAppointmentArr().add(a1);
 		d3.getAppointmentArr().add(a2);
 		
+		printAllDoctor(dArr);
+		printAllPatient(pArr);
 		
 		String answer = answerPD();
 		
@@ -170,8 +172,8 @@ public class Driver {
 						+ doctor.getAppointmentArr().get(0).getAppointmentDate().getYear() + " " +
 						doctor.getAppointmentArr().get(0).getAppointmentDate().getHour() + ":" + 
 						doctor.getAppointmentArr().get(0).getAppointmentDate().getMinute() + 
-						" with Patient " + doctor.getAppointmentArr().get(0).getPatient().getPFName() + " "
-						+ doctor.getAppointmentArr().get(0).getPatient().getPLName()); 
+						" with Patient " + doctor.getAppointmentArr().get(0).getPatient().getFName() + " "
+						+ doctor.getAppointmentArr().get(0).getPatient().getLName()); 
 			}
 		}				
 
